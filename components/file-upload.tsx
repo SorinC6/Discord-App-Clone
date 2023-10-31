@@ -37,6 +37,7 @@ export const FileUpload = ({ endpoint, value, onChange }: FileUploadProps) => {
         onUploadError={(error: Error) => {
           console.log(`ERROR! ${error.message}`);
         }}
+        className="bg-slate-300"
       />{" "}
     </div>
   );

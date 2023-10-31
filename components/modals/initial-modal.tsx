@@ -24,6 +24,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { FileUpload } from "../file-upload";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -36,6 +38,7 @@ const formSchema = z.object({
 
 export const InitialModal = () => {
   const [isMonted, setIsMonted] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setIsMonted(true);
@@ -48,7 +51,15 @@ export const InitialModal = () => {
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log("VALUESss", values);
+    try {
+      await axios.post("/api/servers", values);
+
+      form.reset();
+      router.refresh();
+      window.location.reload();
+    } catch (error) {
+      console.log("ERROR", error);
+    }
   };
 
   if (!isMonted) {
