@@ -9,8 +9,6 @@ export async function POST(req: Request) {
     const { name, imageUrl } = await req.json();
     const profile: any = await currentProfile();
 
-    console.log("profile", profile);
-
     if (!profile) {
       return new NextResponse("Unexpected profile error", { status: 500 });
     }
