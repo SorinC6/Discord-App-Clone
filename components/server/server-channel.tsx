@@ -46,7 +46,10 @@ export const ServerChannel = ({ channel, server, role }: ServerChannelProps) => 
       {channel.name !== 'general' && role !== MemberRole.GUEST && (
         <div className="flex items-center ml-auto gap-x-2">
           <ActionTooltip label="Edit">
-            <EditIcon className="hidden w-4 h-4 transition group-hover:block text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300" />
+            <EditIcon
+              onClick={() => onOpen('editChannel', { server, channel })}
+              className="hidden w-4 h-4 transition group-hover:block text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300"
+            />
           </ActionTooltip>
           <ActionTooltip label="Delete">
             <TrashIcon
