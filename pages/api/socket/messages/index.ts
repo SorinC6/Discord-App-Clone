@@ -14,8 +14,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponseS
     const { content, fileUrl } = req.body;
     const { serverId, channelId } = req.query;
 
-    console.log('@@@@@@profile', content, fileUrl, serverId, channelId);
-
     if (!profile) {
       return res.status(401).json({ error: 'Unauthorized' });
     }
@@ -66,12 +64,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponseS
     if (!member) {
       return res.status(404).json({ message: 'Member not found' });
     }
-    console.log('SDSDS', {
-      content,
-      fileUrl,
-      channelId: channelId as string,
-      memberId: member.id,
-    });
+
     const message = await db.message.create({
       data: {
         content,
